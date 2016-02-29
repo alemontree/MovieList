@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+# from .apps import get_data
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -82,3 +83,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "starter/static"),
+    # '/var/www/static/',
+]
+
+# FIXTURE_DIRS = '/fixtures/'
+#     (
+#    os.path.join(BASE_DIR, 'fixtures'),
+# )
+
+STATIC_ROOT = os.path.join(BASE_DIR, "static_cdn")
+MEDIA_ROOT = os.path.join(BASE_DIR, "media_cdn")
+
+# MYDATA = get_data()

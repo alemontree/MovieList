@@ -1,1 +1,43 @@
 {% extends "starter/base.html" %}
+
+
+{% block content %}
+  <div class="top">
+    <h1>Movie List</h1>
+  </div>
+  Search by Title:
+  <form method='GET' action=''>
+    <input type='text' name="q" placeholder="Search Movies" value='{{ request.GET.q }}'/>
+    <input type='submit' value='Search'/>
+  </form>
+    {% for obj in movies %}
+    
+      <div class='listitem'><img src= {{ obj.posters.thumbnail }}>
+        <span>{{ forloop.counter0|add:movies.start_index }}. 
+        <a href='{{ obj.id }}/'>{{ obj.title }}</a> ({{ obj.year }})</span>
+      </div>
+ 
+    {% endfor  %}
+
+  <div class="pagination">
+    <span class="step-links">
+        {% if movies.has_previous %}
+            <a href="?page={{ movies.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ movies.number }} of {{ movies.paginator.num_pages }}.
+        </span>
+
+        {% if movies.has_next %}
+            <a href="?page={{ movies.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+  </div>
+
+  <a href='/'>Main Page</a>
+
+
+
+{% endblock content %}
+
