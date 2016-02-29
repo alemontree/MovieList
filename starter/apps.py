@@ -10,8 +10,6 @@ class Utils(object):
     # read and parse data from JSON file
     @classmethod
     def get_data(self):
-        print "getting data...."
-
         json_data = open('starter/data/more_movies.json')
         json_parse = json.load(json_data)
         duplicated_data= json_parse['movies']
@@ -55,7 +53,6 @@ class MyAppConfig(AppConfig):
     name = 'starter'
 
     def ready(self):   
-        print "starting....." 
         # load data from JSON on startup
         Utils.get_data() 
 
