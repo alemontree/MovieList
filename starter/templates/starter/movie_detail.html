@@ -1,0 +1,72 @@
+{% extends "starter/base.html" %}
+
+{% block content %}
+  <div class="detail_content">
+  <img src= {{ movie.posters.thumbnail }}> <h1>{{ movie.title }} </h1> 
+
+  <table>
+    <tbody>
+    <tr>
+      <th>Average Ratings</th>
+      <th><div class="half-cell-left">Rating</div><div class="half-cell-right">Score</div></th>
+    </tr>
+    <tr >
+      <td align="center">From Critics</td>
+      <td align="center"> <div class="half-cell-left">{{ movie.ratings.critics_rating }}</div>
+                          <div class="half-cell-right">{{ movie.ratings.critics_score }}</div>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">From Audience</td>
+      <td align="center"> <div class="half-cell-left">{{ movie.ratings.audience_rating }}</div>
+                          <div class="half-cell-right">{{ movie.ratings.audience_score }}</div>
+      </td>
+    <tr class="border_top">
+     <th>MPAA Rating</th> <td>{{ movie.mpaa_rating }} </td>
+    </tr>
+    <tr>
+      <th width="25%" >Year</th> <td>{{ movie.year }} </td>
+    </tr>
+    <tr>
+      <th>Runtime</th>
+        <td> 
+            {% if movie.runtime %} {{ movie.runtime }} minutes 
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+      <th>Synopsis</th> <td>{{ movie.synopsis }}</td>
+    </tr>
+    <tr>
+      <th>Cast</th> 
+      <td>
+      <p>{% for actor in movie.abridged_cast %}{{ actor.name }} 
+          {% if actor.characters.0 %}
+          as <em>{{ actor.characters.0 }}</em></p>
+          {% endif %}
+          {% endfor %} 
+        </td>
+    </tr>
+    <tr>
+      <th>Links</th>
+      <td>
+        {% if  movie.alternate_ids.imdb %}
+          <p><a href="http://www.imdb.com/title/tt{{ movie.alternate_ids.imdb }}">Internet Movie Data Base</a></p>
+        {% endif %}
+        <p><a href="{{ movie.links.alternate }}">Rotten Tomatoes</a></p> 
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <br>
+  <button onclick="goBack()">Go Back</button>
+  
+    <script>
+      function goBack() {
+          window.history.back();
+      }
+    </script>
+  </div>
+
+
+{% endblock content %}
