@@ -22,10 +22,13 @@ class Utils(object):
         print "searching data for ", query
 
         search_result = []
+        id_number_tracker = [] #keeps track of duplicates
 
         for movie in Utils.MyData:
             if (fuzz.token_sort_ratio(query, movie['title']) >= 80) or (fuzz.token_set_ratio(query, movie['title']) >= 80):
-                search_result.append(movie)
+                if movie['id'] not in id_number_tracker:
+                    id_number_tracker.append(movie['id'])
+                    search_result.append(movie)
 
 
         return search_result
