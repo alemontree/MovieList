@@ -14,7 +14,19 @@ class Utils(object):
 
         json_data = open('starter/data/more_movies.json')
         json_parse = json.load(json_data)
-        Utils.MyData = json_parse['movies']
+        duplicated_data= json_parse['movies']
+        Utils.MyData = []
+        #code below is to remove duplicates
+        tally = {}
+        for movie in duplicated_data:
+            if movie['id'] in tally:
+                tally[movie['id']] += 1
+            else:
+                tally[movie['id']] = 1
+                Utils.MyData.append(movie)
+
+
+        
 
     # filter data based on title query
     @classmethod
@@ -29,7 +41,6 @@ class Utils(object):
                 if movie['id'] not in id_number_tracker:
                     id_number_tracker.append(movie['id'])
                     search_result.append(movie)
-
 
         return search_result
 
