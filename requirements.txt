@@ -1,4 +1,5 @@
 Django==1.9.2
 django-bootstrap3==6.2.2
 fuzzywuzzy==0.8.2
+python-Levenshtein==0.12.0
 wheel==0.29.0
